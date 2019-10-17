@@ -33,8 +33,13 @@ public class UserController {
     }
 
     @PostMapping(value = "/login")
-    public Boolean login(LoginCredentialsDTO loginCredentialsDTO){return userService.login(
+    public Boolean login(@RequestBody LoginCredentialsDTO loginCredentialsDTO){return userService.login(
             loginCredentialsDTO.getUsername(),
             loginCredentialsDTO.getPassword());
+    }
+
+    @PostMapping(path = "/create")
+    public void create(@RequestBody UserDTO userDTO){
+        userService.create(userDTO);
     }
 }

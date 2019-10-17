@@ -1,7 +1,5 @@
 package com.example.springdemo.entities;
 
-import com.example.springdemo.utilities.Gender;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,9 +14,13 @@ public class Patient {
     @Column(name = "patient_id", unique = true, nullable = false)
     private Integer patient_id;
 
-    @ManyToOne(targetEntity = Caregiver.class)
-    @JoinColumn(name = "id_caregiver", referencedColumnName = "caregiver_id")
-    private Integer id_caregiver;
+    @ManyToOne
+    @JoinColumn(name = "id_caregiver")
+    private Caregiver caregiver;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
     @Column(name = "name", length = 200)
     private String name;
@@ -27,7 +29,7 @@ public class Patient {
     private Date birthDate;
 
     @Column(name = "gender")
-    private Gender gender;
+    private String gender;
 
     @Column(name = "medicalRecord")
     private String medicalRecord;
@@ -37,14 +39,23 @@ public class Patient {
 
     }
 
-    public Patient(Integer patient_id,Integer id_caregiver, String name, Date birthDate, Gender gender, String medicalRecord)
+    public Patient(Integer patient_id,Caregiver caregiver,User user, String name, Date birthDate, String gender, String medicalRecord)
     {
         this.patient_id = patient_id;
-        this.id_caregiver = id_caregiver;
+        this.caregiver = caregiver;
+        this.user = user;
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
         this.medicalRecord = medicalRecord;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getPatient_id() {
@@ -55,12 +66,12 @@ public class Patient {
         this.patient_id = patient_id;
     }
 
-    public Integer getId_caregiver() {
-        return id_caregiver;
+    public Caregiver getCaregiver() {
+        return caregiver;
     }
 
-    public void setId_caregiver(Integer id_caregiver) {
-        this.id_caregiver = id_caregiver;
+    public void setCaregiver(Caregiver caregiver) {
+        this.caregiver = caregiver;
     }
 
     public String getName() {
@@ -79,11 +90,11 @@ public class Patient {
         this.birthDate = birthDate;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

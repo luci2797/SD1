@@ -7,15 +7,15 @@ public class CaregiverBuilder {
 
     public static CaregiverDTO generateDTOFromCaregiver(Caregiver caregiver){
         return new CaregiverDTO(caregiver.getCaregiver_id(),
-                caregiver.getId_user(),
-                caregiver.getId_doctor(),
+                caregiver.getUser().getUser_id(),
+                caregiver.getDoctor().getDoctor_id(),
                 caregiver.getName(),
-                caregiver.getBirthDate(),
+                caregiver.getBirthDate().toString(),
                 caregiver.getGender(),
                 caregiver.getAddress());
     }
 
-    public static Caregiver generateCaregiverFromDTO(CaregiverDTO caregiverDTO){
+    /*public static Caregiver generateCaregiverFromDTO(CaregiverDTO caregiverDTO){
         return new Caregiver(caregiverDTO.getCaregiver_id(),
                 caregiverDTO.getId_user(),
                 caregiverDTO.getId_doctor(),
@@ -23,5 +23,5 @@ public class CaregiverBuilder {
                 caregiverDTO.getBirthDate(),
                 caregiverDTO.getGender(),
                 caregiverDTO.getAddress());
-    }
+    }*/
 }

@@ -1,9 +1,9 @@
 package com.example.springdemo.entities;
 
 import com.example.springdemo.utilities.Gender;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import javax.print.Doc;
 import java.util.Date;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -17,22 +17,23 @@ public class Caregiver {
     @Column(name = "caregiver_id", unique = true, nullable = false)
     private Integer caregiver_id;
 
-    @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "id_user", referencedColumnName = "user_id")
-    private Integer id_user;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
-    @ManyToOne(targetEntity = Doctor.class)
-    @JoinColumn(name = "id_doctor", referencedColumnName = "doctor_id")
-    private Integer id_doctor;
+    @ManyToOne
+    @JoinColumn(name = "id_doctor")
+    private Doctor doctor;
 
     @Column(name = "name", length = 100)
     private String name;
 
     @Column(name = "birthDate")
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private Date birthDate;
 
     @Column(name = "gender")
-    private Gender gender;
+    private String gender;
 
     @Column(name = "address", length = 200)
     private String address;
@@ -41,10 +42,10 @@ public class Caregiver {
 
     }
 
-    public Caregiver(Integer caregiver_id,Integer id_user, Integer id_doctor, String name, Date birthDate, Gender gender, String address) {
+    public Caregiver(Integer caregiver_id,User user, Doctor doctor, String name, Date birthDate, String gender, String address) {
         this.caregiver_id = caregiver_id;
-        this.id_user = id_user;
-        this.id_doctor = id_doctor;
+        this.user = user;
+        this.doctor = doctor;
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
@@ -59,20 +60,20 @@ public class Caregiver {
         this.caregiver_id = caregiver_id;
     }
 
-    public Integer getId_user() {
-        return id_user;
+    public User getUser() {
+        return user;
     }
 
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getId_doctor() {
-        return id_doctor;
+    public Doctor getDoctor() {
+        return doctor;
     }
 
-    public void setId_doctor(Integer id_doctor) {
-        this.id_doctor = id_doctor;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public String getName() {
@@ -91,11 +92,11 @@ public class Caregiver {
         this.birthDate = birthDate;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

@@ -8,14 +8,15 @@ public class PatientBuilder {
     public static PatientDTO generateDTOFromPatient(Patient patient)
     {
         return new PatientDTO(patient.getPatient_id(),
-                patient.getId_caregiver(),
+                patient.getCaregiver().getCaregiver_id(),
+                patient.getUser().getUser_id(),
                 patient.getName(),
                 patient.getBirthDate(),
                 patient.getGender(),
                 patient.getMedicalRecord());
     }
 
-    public static Patient generatePatientFromDTO(PatientDTO patientDTO)
+   /* public static Patient generatePatientFromDTO(PatientDTO patientDTO)
     {
         return new Patient(patientDTO.getPatient_id(),
                 patientDTO.getId_caregiver(),
@@ -23,5 +24,5 @@ public class PatientBuilder {
                 patientDTO.getBirthDate(),
                 patientDTO.getGender(),
                 patientDTO.getMedicalRecord());
-    }
+    }*/
 }

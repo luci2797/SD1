@@ -54,16 +54,10 @@ public class UserService {
         }
     }
 
-    public Boolean register(String username, String password, Role role)
+    public void create(UserDTO userDTO)
     {
-        if (this.getUserByUsername(username) == null){
-            userRepository.createUser(username, password, role);
-            return true;
-        }
-        else {
-            System.out.println("user already exists");
-            return false;
-        }
+            userRepository.createUser(userDTO.getUsername(), userDTO.getPassword(), userDTO.getRole());
+
     }
 
 }

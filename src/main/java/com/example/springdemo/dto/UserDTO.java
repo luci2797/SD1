@@ -6,9 +6,9 @@ public class UserDTO {
     private Integer user_id;
     private String username;
     private String password;
-    private Role role;
+    private String role;
 
-    public UserDTO(Integer user_id, String username, String password, Role role) {
+    public UserDTO(Integer user_id, String username, String password, String role) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
@@ -39,11 +39,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 }

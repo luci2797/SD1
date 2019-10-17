@@ -1,5 +1,6 @@
 package com.example.springdemo.entities;
 
+
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -13,9 +14,9 @@ public class Doctor {
     @Column(name = "doctor_id", unique = true, nullable = false)
     private Integer doctor_id;
 
-    @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "id_user", referencedColumnName = "user_id")
-    private Integer id_user;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
     @Column(name = "firstName", length = 100)
     private String firstName;
@@ -28,10 +29,10 @@ public class Doctor {
 
     }
 
-    public Doctor(Integer doctor_id,Integer id_user, String firstName, String lastName)
+    public Doctor(Integer doctor_id,User user, String firstName, String lastName)
     {
         this.doctor_id = doctor_id;
-        this.id_user = id_user;
+        this.user = user;
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -44,12 +45,12 @@ public class Doctor {
         this.doctor_id = doctor_id;
     }
 
-    public Integer getId_user() {
-        return id_user;
+    public User getUser() {
+        return user;
     }
 
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getFirstName() {

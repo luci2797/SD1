@@ -47,7 +47,7 @@ public class MedicationService {
             return false;
         }
         else {
-            medicationRepository.deleteById(id);
+            medicationRepository.deleteMedicationById(id);
             return true;
         }
     }

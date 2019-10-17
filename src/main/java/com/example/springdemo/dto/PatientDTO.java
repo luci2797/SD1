@@ -8,18 +8,28 @@ import java.util.Date;
 public class PatientDTO {
     private Integer patient_id;
     private Integer id_caregiver;
+    private Integer id_user;
     private String name;
     private Date birthDate;
-    private Gender gender;
+    private String gender;
     private String medicalRecord;
 
-    public PatientDTO(Integer patient_id, Integer id_caregiver, String name, Date birthDate, Gender gender, String medicalRecord) {
+    public PatientDTO(Integer patient_id, Integer id_caregiver,Integer id_user, String name, Date birthDate, String gender, String medicalRecord) {
         this.patient_id = patient_id;
         this.id_caregiver = id_caregiver;
+        this.id_user = id_user;
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
         this.medicalRecord = medicalRecord;
+    }
+
+    public Integer getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(Integer id_user) {
+        this.id_user = id_user;
     }
 
     public Integer getPatient_id() {
@@ -54,11 +64,11 @@ public class PatientDTO {
         this.birthDate = birthDate;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

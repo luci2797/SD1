@@ -3,6 +3,7 @@ package com.example.springdemo.dto;
 import com.example.springdemo.entities.Doctor;
 import com.example.springdemo.entities.User;
 import com.example.springdemo.utilities.Gender;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -12,11 +13,11 @@ public class CaregiverDTO {
     private Integer id_user;
     private Integer id_doctor;
     private String name;
-    private Date birthDate;
-    private Gender gender;
+    private String birthDate;
+    private String gender;
     private String address;
 
-    public CaregiverDTO(Integer caregiver_id, Integer id_user, Integer id_doctor, String name, Date birthDate, Gender gender, String address) {
+    public CaregiverDTO(Integer caregiver_id, Integer id_user, Integer id_doctor, String name, String birthDate, String gender, String address) {
         this.caregiver_id = caregiver_id;
         this.id_user = id_user;
         this.id_doctor = id_doctor;
@@ -58,19 +59,19 @@ public class CaregiverDTO {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

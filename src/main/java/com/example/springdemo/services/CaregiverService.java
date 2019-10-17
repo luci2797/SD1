@@ -4,6 +4,8 @@ import com.example.springdemo.dto.CaregiverDTO;
 import com.example.springdemo.dto.builders.CaregiverBuilder;
 import com.example.springdemo.entities.Caregiver;
 import com.example.springdemo.repositories.CaregiverRepository;
+import com.example.springdemo.repositories.DoctorRepository;
+import com.example.springdemo.utilities.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +15,13 @@ import java.util.List;
 @Service
 public class CaregiverService {
     private final CaregiverRepository caregiverRepository;
+    private final DoctorRepository doctorRepository;
 
     @Autowired
-    public CaregiverService(CaregiverRepository caregiverRepository)
+    public CaregiverService(CaregiverRepository caregiverRepository, DoctorRepository doctorRepository)
     {
         this.caregiverRepository = caregiverRepository;
+        this.doctorRepository = doctorRepository;
     }
 
     public List<CaregiverDTO> getAll()
@@ -44,10 +48,10 @@ public class CaregiverService {
         return caregiverDTOS;
     }
 
-    public void createDoctor(CaregiverDTO caregiverDTO)
+    public void createCaregiver(CaregiverDTO caregiverDTO)
     {
         caregiverRepository.createCaregiver(caregiverDTO.getAddress(),
-                caregiverDTO.getBirthDate(),
+                DateUtils.stringToDate(caregiverDTO.getBirthDate()),
                 caregiverDTO.getGender(),
                 caregiverDTO.getName(),
                 caregiverDTO.getId_doctor(),
@@ -75,11 +79,11 @@ public class CaregiverService {
         else {
             caregiverRepository.updateCaregiver(caregiverDTO.getCaregiver_id(),
                     caregiverDTO.getAddress(),
-                    caregiverDTO.getBirthDate(),
+                    DateUtils.stringToDate(caregiverDTO.getBirthDate()),
                     caregiverDTO.getGender(),
                     caregiverDTO.getName(),
-                    caregiverDTO.getId_doctor(),
-                    caregiverDTO.getId_user());
+                    doctorRepository.getDoctorById(caregiverDTO.getId_doctor())
+            );
             return true;
         }
     }

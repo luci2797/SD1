@@ -29,23 +29,23 @@ public class Medication {
     @Column(name = "dosage")
     private Integer dosage;
 
-    @ManyToOne(targetEntity = Patient.class)
-    @JoinColumn(name = "id_patient", referencedColumnName = "patient_id")
-    private Integer id_patient;
+    @ManyToOne
+    @JoinColumn(name = "id_patient")
+    private Patient patient;
 
     public Medication()
     {
 
     }
 
-    public Medication(Integer medication_id,String name, Date start, Date end, String sideEffects, Integer dosage, Integer id_patient) {
+    public Medication(Integer medication_id,String name, Date start, Date end, String sideEffects, Integer dosage, Patient patient) {
         this.medication_id = medication_id;
         this.name = name;
         this.start = start;
         this.end = end;
         this.sideEffects = sideEffects;
         this.dosage = dosage;
-        this.id_patient = id_patient;
+        this.patient = patient;
     }
 
     public Integer getMedication_id() {
@@ -96,11 +96,11 @@ public class Medication {
         this.dosage = dosage;
     }
 
-    public Integer getId_patient() {
-        return id_patient;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setId_patient(Integer id_patient) {
-        this.id_patient = id_patient;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

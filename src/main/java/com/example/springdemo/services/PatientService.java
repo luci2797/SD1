@@ -62,6 +62,7 @@ public class PatientService {
         else {
             patientRepository.updatePatient(patientDTO.getPatient_id(),
                     patientDTO.getId_caregiver(),
+                    patientDTO.getId_user(),
                     patientDTO.getName(),
                     patientDTO.getBirthDate(),
                     patientDTO.getGender(),
@@ -73,6 +74,7 @@ public class PatientService {
     public void create(PatientDTO patientDTO)
     {
         patientRepository.createPatient(patientDTO.getId_caregiver(),
+                patientDTO.getId_user(),
                 patientDTO.getName(),
                 patientDTO.getBirthDate(),
                 patientDTO.getGender(),
