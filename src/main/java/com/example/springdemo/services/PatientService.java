@@ -3,23 +3,28 @@ package com.example.springdemo.services;
 import com.example.springdemo.dto.PatientDTO;
 import com.example.springdemo.dto.builders.PatientBuilder;
 import com.example.springdemo.entities.Patient;
+import com.example.springdemo.repositories.CaregiverRepository;
 import com.example.springdemo.repositories.PatientRepository;
-import com.example.springdemo.utilities.Gender;
+import com.example.springdemo.repositories.UserRepository;
+import com.example.springdemo.utilities.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
 public class PatientService {
     private final PatientRepository patientRepository;
+    private final UserRepository userRepository;
+    private final CaregiverRepository caregiverRepository;
 
     @Autowired
-    public PatientService(PatientRepository patientRepository)
+    public PatientService(PatientRepository patientRepository, UserRepository userRepository, CaregiverRepository caregiverRepository)
     {
         this.patientRepository = patientRepository;
+        this.caregiverRepository = caregiverRepository;
+        this.userRepository = userRepository;
     }
 
     public List<PatientDTO> getAll()
@@ -36,9 +41,13 @@ public class PatientService {
         return PatientBuilder.generateDTOFromPatient(patientRepository.getPatientById(id));
     }
 
-    public PatientDTO findByCaregiverId(Integer caregiverId)
+    public List<PatientDTO> findByCaregiverId(Integer caregiverId)
     {
-        return PatientBuilder.generateDTOFromPatient(patientRepository.getPatientById(caregiverId));
+        ArrayList<PatientDTO> patientDTOS = new ArrayList<PatientDTO>() ;
+        for (Patient p : patientRepository.getAllByCaregiverId(caregiverRepository.getCaregiverById(caregiverId))){
+            patientDTOS.add(PatientBuilder.generateDTOFromPatient(p));
+        }
+        return patientDTOS;
     }
 
     public Boolean deleteById(Integer id)
@@ -60,11 +69,12 @@ public class PatientService {
             return false;
         }
         else {
-            patientRepository.updatePatient(patientDTO.getPatient_id(),
-                    patientDTO.getId_caregiver(),
-                    patientDTO.getId_user(),
+            patientRepository.updatePatient(
+                    patientDTO.getPatient_id(),
+                    caregiverRepository.getCaregiverById(patientDTO.getId_caregiver()),
+                    userRepository.getUserByUser_id(patientDTO.getId_user()),
                     patientDTO.getName(),
-                    patientDTO.getBirthDate(),
+                    DateUtils.stringToDate(patientDTO.getBirthDate()),
                     patientDTO.getGender(),
                     patientDTO.getMedicalRecord());
             return true;
@@ -73,10 +83,11 @@ public class PatientService {
 
     public void create(PatientDTO patientDTO)
     {
-        patientRepository.createPatient(patientDTO.getId_caregiver(),
-                patientDTO.getId_user(),
+        patientRepository.createPatient(
+                caregiverRepository.getCaregiverById(patientDTO.getId_caregiver()),
+                userRepository.getUserByUser_id(patientDTO.getId_user()),
                 patientDTO.getName(),
-                patientDTO.getBirthDate(),
+                DateUtils.stringToDate(patientDTO.getBirthDate()),
                 patientDTO.getGender(),
                 patientDTO.getMedicalRecord());
     }

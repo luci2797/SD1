@@ -2,6 +2,7 @@ package com.example.springdemo.dto.builders;
 
 import com.example.springdemo.dto.CaregiverDTO;
 import com.example.springdemo.entities.Caregiver;
+import com.example.springdemo.utilities.DateUtils;
 
 public class CaregiverBuilder {
 
@@ -10,7 +11,7 @@ public class CaregiverBuilder {
                 caregiver.getUser().getUser_id(),
                 caregiver.getDoctor().getDoctor_id(),
                 caregiver.getName(),
-                caregiver.getBirthDate().toString(),
+                DateUtils.dateToString(caregiver.getBirthDate()),
                 caregiver.getGender(),
                 caregiver.getAddress());
     }

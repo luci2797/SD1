@@ -7,13 +7,13 @@ import java.util.Date;
 public class MedicationDTO {
     private Integer medication_id;
     private String name;
-    private Date start;
-    private Date end;
+    private String start;
+    private String end;
     private String sideEffects;
     private Integer dosage;
     private Integer id_patient;
 
-    public MedicationDTO(Integer medication_id, String name, Date start, Date end, String sideEffects, Integer dosage, Integer id_patient) {
+    public MedicationDTO(Integer medication_id, String name, String start, String end, String sideEffects, Integer dosage, Integer id_patient) {
         this.medication_id = medication_id;
         this.name = name;
         this.start = start;
@@ -39,19 +39,19 @@ public class MedicationDTO {
         this.name = name;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Date getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 

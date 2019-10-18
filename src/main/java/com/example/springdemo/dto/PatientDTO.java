@@ -10,11 +10,11 @@ public class PatientDTO {
     private Integer id_caregiver;
     private Integer id_user;
     private String name;
-    private Date birthDate;
+    private String birthDate;
     private String gender;
     private String medicalRecord;
 
-    public PatientDTO(Integer patient_id, Integer id_caregiver,Integer id_user, String name, Date birthDate, String gender, String medicalRecord) {
+    public PatientDTO(Integer patient_id, Integer id_caregiver,Integer id_user, String name, String birthDate, String gender, String medicalRecord) {
         this.patient_id = patient_id;
         this.id_caregiver = id_caregiver;
         this.id_user = id_user;
@@ -56,11 +56,11 @@ public class PatientDTO {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

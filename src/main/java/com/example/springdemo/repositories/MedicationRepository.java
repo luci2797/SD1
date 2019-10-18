@@ -1,6 +1,7 @@
 package com.example.springdemo.repositories;
 
 import com.example.springdemo.entities.Medication;
+import com.example.springdemo.entities.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,23 +20,30 @@ public interface MedicationRepository extends JpaRepository<Medication, Integer>
     Medication getMedicationById(Integer id);
 
     @Query(value = "select u from Medication u where u.patient = ?1")
-    List<Medication> getMedicationByPatientId(Integer patientId);
-
-    @Transactional
-    @Query(value = "delete from Medication u where u.medication_id = ?1")
-    void deleteMedicationById(Integer medicationId);
-
-    @Query(value = "update Medication u set u.name = ?2, u.start = ?3, u.end = ?4, u.sideEffects=?5, u.dosage = ?6, u.patient = ?7 where u.medication_id = ?1")
-    void updateMedication(Integer medication_id, String name, Date start, Date end, String sideEffects, Integer dosage, Integer id_patient);
+    List<Medication> getMedicationByPatientId(Patient patient);
 
     @Transactional
     @Modifying
-    @Query(value = "insert into Medication(medication_id,name,start,end,sideEffects,dosage,id_patient) " +
+    @Query(value = "delete from Medication u where u.medication_id = ?1")
+    void deleteMedicationById(Integer medicationId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update Medication u set u.name = ?2, u.start = ?3, u.end = ?4, u.sideEffects=?5, u.dosage = ?6, u.patient = ?7 where u.medication_id = ?1")
+    void updateMedication(Integer medication_id,
+                          String name, Date start,
+                          Date end, String sideEffects,
+                          Integer dosage,
+                          Patient patient);
+
+    @Transactional
+    @Modifying
+    @Query(value = "insert into Medication(medication_id,name,start_date,end_date,side_effects,dosage,id_patient) " +
             "values (null, :name,:start,:end,:sideEffects,:dosage,:idPatient)", nativeQuery = true)
     void createMedication(@Param("name") String name,
                           @Param("start") Date start,
                           @Param("end") Date end,
                           @Param("sideEffects") String sideEffects,
                           @Param("dosage") Integer dosage,
-                          @Param("idPatient") Integer id_patient);
+                          @Param("idPatient") Patient patient);
 }

@@ -4,6 +4,8 @@ import com.example.springdemo.dto.MedicationDTO;
 import com.example.springdemo.dto.builders.MedicationBuilder;
 import com.example.springdemo.entities.Medication;
 import com.example.springdemo.repositories.MedicationRepository;
+import com.example.springdemo.repositories.PatientRepository;
+import com.example.springdemo.utilities.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,12 @@ import java.util.List;
 @Service
 public class MedicationService {
     private final MedicationRepository medicationRepository;
+    private final PatientRepository patientRepository;
 
     @Autowired
-    public MedicationService(MedicationRepository medicationRepository){
+    public MedicationService(MedicationRepository medicationRepository, PatientRepository patientRepository){
         this.medicationRepository = medicationRepository;
+        this.patientRepository = patientRepository;
     }
 
     public List<MedicationDTO> getAll(){
@@ -35,7 +39,7 @@ public class MedicationService {
     public List<MedicationDTO> findByPatientId(Integer patientId){
         ArrayList<MedicationDTO> medicationDTOS = new ArrayList<MedicationDTO>();
 
-        for (Medication m:medicationRepository.getMedicationByPatientId(patientId)){
+        for (Medication m:medicationRepository.getMedicationByPatientId(patientRepository.getPatientById(patientId))){
             medicationDTOS.add(MedicationBuilder.generateDTOFromMedication(m));
         }
         return medicationDTOS;
@@ -58,24 +62,27 @@ public class MedicationService {
             return false;
         }
         else {
-            medicationRepository.updateMedication(medicationDTO.getMedication_id(),
+            medicationRepository.updateMedication(
+                    medicationDTO.getMedication_id(),
                     medicationDTO.getName(),
-                    medicationDTO.getStart(),
-                    medicationDTO.getEnd(),
+                    DateUtils.stringToDate(medicationDTO.getStart()),
+                    DateUtils.stringToDate(medicationDTO.getEnd()),
                     medicationDTO.getSideEffects(),
                     medicationDTO.getDosage(),
-                    medicationDTO.getId_patient());
+                    patientRepository.getPatientById(medicationDTO.getId_patient()));
             return true;
         }
     }
 
     public void create(MedicationDTO medicationDTO){
-        medicationRepository.createMedication(medicationDTO.getName(),
-                medicationDTO.getStart(),
-                medicationDTO.getEnd(),
+        medicationRepository.createMedication(
+                medicationDTO.getName(),
+                DateUtils.stringToDate(medicationDTO.getStart()),
+                DateUtils.stringToDate(medicationDTO.getEnd()),
                 medicationDTO.getSideEffects(),
                 medicationDTO.getDosage(),
-                medicationDTO.getId_patient());
+                patientRepository.getPatientById(medicationDTO.getId_patient())
+        );
     }
 
 }

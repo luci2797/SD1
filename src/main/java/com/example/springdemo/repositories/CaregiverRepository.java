@@ -2,8 +2,6 @@ package com.example.springdemo.repositories;
 
 import com.example.springdemo.entities.Caregiver;
 import com.example.springdemo.entities.Doctor;
-import com.example.springdemo.entities.User;
-import com.example.springdemo.utilities.Gender;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
