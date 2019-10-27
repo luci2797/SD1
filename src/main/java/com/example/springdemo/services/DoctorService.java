@@ -38,7 +38,7 @@ public class DoctorService {
     {
         doctorRepository.createDoctor(doctorDTO.getFirstName(),
                 doctorDTO.getLastName(),
-                doctorDTO.getId_user());
+                doctorDTO.getIdUser());
     }
 
     public Boolean deleteDoctorById(Integer id)
@@ -55,12 +55,12 @@ public class DoctorService {
 
     public Boolean editDoctor(DoctorDTO doctorDTO)
     {
-        if (this.findDoctorById(doctorDTO.getDoctor_id()) == null){
+        if (this.findDoctorById(doctorDTO.getDoctorId()) == null){
             System.out.println("doctor with the specified id does not exist");
             return false;
         }
         else {
-            doctorRepository.updateDoctor(doctorDTO.getDoctor_id(),
+            doctorRepository.updateDoctor(doctorDTO.getDoctorId(),
                     doctorDTO.getFirstName(),
                     doctorDTO.getLastName());
             return true;

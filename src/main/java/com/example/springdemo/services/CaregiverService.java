@@ -54,8 +54,8 @@ public class CaregiverService {
                 DateUtils.stringToDate(caregiverDTO.getBirthDate()),
                 caregiverDTO.getGender(),
                 caregiverDTO.getName(),
-                caregiverDTO.getId_doctor(),
-                caregiverDTO.getId_user());
+                caregiverDTO.getIdDoctor(),
+                caregiverDTO.getIdUser());
     }
 
     public Boolean deleteCaregiverById(Integer id)
@@ -72,17 +72,17 @@ public class CaregiverService {
 
     public Boolean editCaregiver(CaregiverDTO caregiverDTO)
     {
-        if (this.findCaregiverById(caregiverDTO.getCaregiver_id()) == null){
+        if (this.findCaregiverById(caregiverDTO.getCaregiverId()) == null){
             System.out.println("Caregiver with the specified id does not exist");
             return false;
         }
         else {
-            caregiverRepository.updateCaregiver(caregiverDTO.getCaregiver_id(),
+            caregiverRepository.updateCaregiver(caregiverDTO.getCaregiverId(),
                     caregiverDTO.getAddress(),
                     DateUtils.stringToDate(caregiverDTO.getBirthDate()),
                     caregiverDTO.getGender(),
                     caregiverDTO.getName(),
-                    doctorRepository.getDoctorById(caregiverDTO.getId_doctor())
+                    doctorRepository.getDoctorById(caregiverDTO.getIdDoctor())
             );
             return true;
         }

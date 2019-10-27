@@ -5,15 +5,15 @@ import com.example.springdemo.entities.Patient;
 import java.util.Date;
 
 public class MedicationDTO {
-    private Integer medication_id;
+    private String medication_id;
     private String name;
     private String start;
     private String end;
     private String sideEffects;
-    private Integer dosage;
-    private Integer id_patient;
+    private String dosage;
+    private String id_patient;
 
-    public MedicationDTO(Integer medication_id, String name, String start, String end, String sideEffects, Integer dosage, Integer id_patient) {
+    public MedicationDTO(String medication_id, String name, String start, String end, String sideEffects, String dosage, String id_patient) {
         this.medication_id = medication_id;
         this.name = name;
         this.start = start;
@@ -23,11 +23,11 @@ public class MedicationDTO {
         this.id_patient = id_patient;
     }
 
-    public Integer getMedication_id() {
+    public String getMedication_id() {
         return medication_id;
     }
 
-    public void setMedication_id(Integer medication_id) {
+    public void setMedication_id(String medication_id) {
         this.medication_id = medication_id;
     }
 
@@ -63,19 +63,19 @@ public class MedicationDTO {
         this.sideEffects = sideEffects;
     }
 
-    public Integer getDosage() {
+    public String getDosage() {
         return dosage;
     }
 
-    public void setDosage(Integer dosage) {
+    public void setDosage(String dosage) {
         this.dosage = dosage;
     }
 
-    public Integer getId_patient() {
+    public String getId_patient() {
         return id_patient;
     }
 
-    public void setId_patient(Integer id_patient) {
+    public void setId_patient(String id_patient) {
         this.id_patient = id_patient;
     }
 }

@@ -16,12 +16,12 @@ public class MedicationBuilder {
     }*/
 
     public static MedicationDTO generateDTOFromMedication(Medication medication){
-        return new MedicationDTO(medication.getMedication_id(),
+        return new MedicationDTO(medication.getMedication_id().toString(),
                 medication.getName(),
                 DateUtils.dateToString(medication.getStart()),
                 DateUtils.dateToString(medication.getEnd()),
                 medication.getSideEffects(),
-                medication.getDosage(),
-                medication.getPatient().getPatient_id());
+                medication.getDosage().toString(),
+                medication.getPatient().getPatient_id().toString());
     }
 }

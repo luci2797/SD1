@@ -8,9 +8,9 @@ public class PatientBuilder {
 
     public static PatientDTO generateDTOFromPatient(Patient patient)
     {
-        return new PatientDTO(patient.getPatient_id(),
-                patient.getCaregiver().getCaregiver_id(),
-                patient.getUser().getUser_id(),
+        return new PatientDTO(patient.getPatient_id().toString(),
+                patient.getCaregiver().getCaregiver_id().toString(),
+                patient.getUser().getUser_id().toString(),
                 patient.getName(),
                 DateUtils.dateToString(patient.getBirthDate()),
                 patient.getGender(),

@@ -64,15 +64,15 @@ public class PatientService {
 
     public Boolean update(PatientDTO patientDTO)
     {
-        if(this.findById(patientDTO.getPatient_id()) == null){
+        if(this.findById(Integer.parseInt(patientDTO.getPatient_id())) == null){
             System.out.println("patient with the specified id does not exist");
             return false;
         }
         else {
             patientRepository.updatePatient(
-                    patientDTO.getPatient_id(),
-                    caregiverRepository.getCaregiverById(patientDTO.getId_caregiver()),
-                    userRepository.getUserByUser_id(patientDTO.getId_user()),
+                    Integer.parseInt(patientDTO.getPatient_id()),
+                    caregiverRepository.getCaregiverById(Integer.parseInt(patientDTO.getId_caregiver())),
+                    userRepository.getUserByUser_id(Integer.parseInt(patientDTO.getId_user())),
                     patientDTO.getName(),
                     DateUtils.stringToDate(patientDTO.getBirthDate()),
                     patientDTO.getGender(),
@@ -84,8 +84,8 @@ public class PatientService {
     public void create(PatientDTO patientDTO)
     {
         patientRepository.createPatient(
-                caregiverRepository.getCaregiverById(patientDTO.getId_caregiver()),
-                userRepository.getUserByUser_id(patientDTO.getId_user()),
+                caregiverRepository.getCaregiverById(Integer.parseInt(patientDTO.getId_caregiver())),
+                userRepository.getUserByUser_id(Integer.parseInt(patientDTO.getId_user())),
                 patientDTO.getName(),
                 DateUtils.stringToDate(patientDTO.getBirthDate()),
                 patientDTO.getGender(),

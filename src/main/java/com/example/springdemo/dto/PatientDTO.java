@@ -6,15 +6,15 @@ import com.example.springdemo.utilities.Gender;
 import java.util.Date;
 
 public class PatientDTO {
-    private Integer patient_id;
-    private Integer id_caregiver;
-    private Integer id_user;
+    private String patient_id;
+    private String id_caregiver;
+    private String id_user;
     private String name;
     private String birthDate;
     private String gender;
     private String medicalRecord;
 
-    public PatientDTO(Integer patient_id, Integer id_caregiver,Integer id_user, String name, String birthDate, String gender, String medicalRecord) {
+    public PatientDTO(String patient_id, String id_caregiver,String id_user, String name, String birthDate, String gender, String medicalRecord) {
         this.patient_id = patient_id;
         this.id_caregiver = id_caregiver;
         this.id_user = id_user;
@@ -24,27 +24,27 @@ public class PatientDTO {
         this.medicalRecord = medicalRecord;
     }
 
-    public Integer getId_user() {
+    public String getId_user() {
         return id_user;
     }
 
-    public void setId_user(Integer id_user) {
+    public void setId_user(String id_user) {
         this.id_user = id_user;
     }
 
-    public Integer getPatient_id() {
+    public String getPatient_id() {
         return patient_id;
     }
 
-    public void setPatient_id(Integer patient_id) {
+    public void setPatient_id(String patient_id) {
         this.patient_id = patient_id;
     }
 
-    public Integer getId_caregiver() {
+    public String getId_caregiver() {
         return id_caregiver;
     }
 
-    public void setId_caregiver(Integer id_caregiver) {
+    public void setId_caregiver(String id_caregiver) {
         this.id_caregiver = id_caregiver;
     }
 

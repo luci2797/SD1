@@ -4,6 +4,7 @@ public class IdDTO {
     private Integer id;
 
     public Integer getId() {
+        System.out.println("i the value of the id is:" + this.id);
         return id;
     }
 

@@ -57,19 +57,19 @@ public class MedicationService {
     }
 
     public Boolean update(MedicationDTO medicationDTO){
-        if (this.findById(medicationDTO.getMedication_id()) == null){
+        if (this.findById(Integer.parseInt(medicationDTO.getMedication_id())) == null){
             System.out.println("medication with specified id does not exist");
             return false;
         }
         else {
             medicationRepository.updateMedication(
-                    medicationDTO.getMedication_id(),
+                    Integer.parseInt(medicationDTO.getMedication_id()),
                     medicationDTO.getName(),
                     DateUtils.stringToDate(medicationDTO.getStart()),
                     DateUtils.stringToDate(medicationDTO.getEnd()),
                     medicationDTO.getSideEffects(),
-                    medicationDTO.getDosage(),
-                    patientRepository.getPatientById(medicationDTO.getId_patient()));
+                    Integer.parseInt(medicationDTO.getDosage()),
+                    patientRepository.getPatientById(Integer.parseInt(medicationDTO.getId_patient())));
             return true;
         }
     }
@@ -80,8 +80,8 @@ public class MedicationService {
                 DateUtils.stringToDate(medicationDTO.getStart()),
                 DateUtils.stringToDate(medicationDTO.getEnd()),
                 medicationDTO.getSideEffects(),
-                medicationDTO.getDosage(),
-                patientRepository.getPatientById(medicationDTO.getId_patient())
+                Integer.parseInt(medicationDTO.getDosage()),
+                patientRepository.getPatientById(Integer.parseInt(medicationDTO.getId_patient()))
         );
     }
 

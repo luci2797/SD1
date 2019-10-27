@@ -28,6 +28,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     void createUser(@Param("username") String username,@Param("password") String password,@Param("role") String role);
 
     @Transactional
+    @Modifying
     @Query(value = "delete from User u where u.user_id = ?1")
     void deleteUserById(Integer id);
 }
